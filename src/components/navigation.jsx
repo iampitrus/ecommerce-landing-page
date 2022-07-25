@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import CartDialogue from "./cartModal";
-function Nav() {
-  const [showCheckout, setShowCheckout] = useState(false);
+import CartDialogue from "./Modal/cartModal";
+function Nav({ number }) {
+  const [toggleDialogue, settoggleDialogue] = useState(false);
   return (
     <Header>
       <div className="pages-link">
@@ -21,16 +21,16 @@ function Nav() {
       </div>
       <div className="user-link">
         <img
-          onClick={() => setShowCheckout(!showCheckout)}
+          onClick={() => settoggleDialogue(!toggleDialogue)}
           className="cart"
           src="./images/icon-cart.svg"
           alt="shop"
         />
         <img className="avatar" src="./images/image-avatar.png" alt="avatar" />
-        <NotifyBtn>3</NotifyBtn>
-        {showCheckout && (
+        {number > 0 && <NotifyBtn>{number}</NotifyBtn>}
+        {toggleDialogue && (
           <Checkout>
-            <CartDialogue />
+            <CartDialogue price={125.0} number={number} />
           </Checkout>
         )}
       </div>
@@ -102,7 +102,7 @@ const NotifyBtn = styled.button`
   padding: 0 5px;
   font-size: 8px;
   top: 2.15rem;
-  right: calc(2.5rem + 43px + 10%);
+  right: calc(2.5rem + 43px + 12%);
 `;
 
 const Checkout = styled.div`
