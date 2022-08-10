@@ -2,16 +2,36 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import CartDialogue from "./Modal/cartModal";
-function Nav({ number }) {
-  const [toggleDialogue, settoggleDialogue] = useState(false);
+import ToggleButton from "./ToogleButton";
+import Backdrop from "./Modal/Backdrop";
+function Nav({ number, reset }) {
+  const [toggleDialogue, settoggleDialogue] = useState(false); // This toggles the cartbox
+  const [showNav, setShowNav] = useState(false); // This controls the open and close of the nav
   return (
     <Header>
       <div className="pages-link">
+        <ToggleButton setNav={() => setShowNav(true)} />
         <a href="/">
           <img src="./images/logo.svg" alt="logo" />
         </a>
-        <ToggleButton />
-        <PrimaryNavigation className="primary-navigation">
+        {showNav && <Backdrop />}
+        <PrimaryNavigation
+          style={showNav ? { display: "flex" } : { display: "none" }}
+          className="primary-nav"
+        >
+          <svg
+            onClick={() => setShowNav(false)}
+            className="close-nav"
+            width="14"
+            height="15"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+              fill="#69707D"
+              fillRule="evenodd"
+            />
+          </svg>
           <NavLink to={"/collection"}>Collections</NavLink>
           <NavLink to={"/men"}>Men</NavLink>
           <NavLink to={"/women"}>Women</NavLink>
@@ -20,17 +40,19 @@ function Nav({ number }) {
         </PrimaryNavigation>
       </div>
       <div className="user-link">
-        <img
-          onClick={() => settoggleDialogue(!toggleDialogue)}
-          className="cart"
-          src="./images/icon-cart.svg"
-          alt="shop"
-        />
+        <div style={{ position: "relative" }}>
+          <img
+            onClick={() => settoggleDialogue(!toggleDialogue)}
+            className="cart"
+            src="./images/icon-cart.svg"
+            alt="shop"
+          />
+          {number > 0 && <NotifyBtn>{number}</NotifyBtn>}
+        </div>
         <img className="avatar" src="./images/image-avatar.png" alt="avatar" />
-        {number > 0 && <NotifyBtn>{number}</NotifyBtn>}
         {toggleDialogue && (
           <Checkout>
-            <CartDialogue price={125.0} number={number} />
+            <CartDialogue reset={reset} price={125.0} number={number} />
           </Checkout>
         )}
       </div>
@@ -42,12 +64,13 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   background: transparent;
-  height: 6rem;
+  height: clamp(4rem, 10vw, 6rem);
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid hsl(223, 64%, 98%);
+  border-bottom: 1px solid var(--Lightgrayishblue);
   .pages-link {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
   .user-link {
@@ -57,68 +80,74 @@ const Header = styled.header`
       cursor: pointer;
     }
     .cart:hover {
-      color: hsl(220, 13%, 13%);
+      color: var(--Veryblue);
     }
   }
   .avatar {
-    width: 45px;
-    margin-left: 2.5rem;
+    width: clamp(25px, 10vw, 45px);
+    margin-left: min(2.5rem, 5vw);
     &:hover {
       border-radius: 50%;
-      border: 1.5px solid hsl(26, 100%, 55%);
+      border: 1.5px solid var(--Orange);
     }
   }
 `;
 const PrimaryNavigation = styled.nav`
-  margin-left: 2rem;
+  display: flex;
+  margin-left: 4rem;
+  gap: 1.8rem;
   a {
     color: hsl(219, 9%, 45%);
     font-weight: 400;
     font-size: 0.9rem;
-    margin-inline: 0.9rem;
-    padding-block: 2.2rem;
+    padding-block: 2.4rem;
     &.active {
-      border-bottom: 3px solid hsl(26, 100%, 55%);
-      color: hsl(220, 13%, 13%);
+      border-bottom: 3px solid var(--Orange);
+      color: var(--Veryblue);
     }
   }
-  @media (max-width: 375px) {
+  .close-nav {
+    display: none;
+  }
+  @media (max-width: 900px) {
     position: fixed;
-    z-index: 1000;
-    inset: 0 0 0 30%;
-    padding: min(30vh, 10rem) 2em;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 100;
+    inset: 0 30% 0 -65px;
+    padding: 6rem 40px;
     flex-direction: column;
-    background-color: hsl(0, 0%, 100%);
-    transorm: translateX(100%);
+    background: var(--White);
+    a {
+      padding: 0;
+      font-weight: 700;
+    }
+    .close-nav {
+      display: block;
+      position: absolute;
+      top: 30px;
+      left: 40px;
+    }
   }
 `;
 
 const NotifyBtn = styled.button`
-  background-color: hsl(26, 100%, 55%);
+  background-color: var(--Orange);
   color: #fff;
   position: absolute;
   border: none;
   border-radius: 5px;
   padding: 0 5px;
   font-size: 8px;
-  top: 2.15rem;
-  right: calc(2.5rem + 43px + 12%);
+  top: -3px;
+  right: -2px;
 `;
 
 const Checkout = styled.div`
   position: absolute;
   top: 6rem;
   right: 6rem;
-`;
-
-const ToggleButton = styled.button`
-  display: none;
-  @media (max-width: 375px) {
-    display: block;
-    z-index: 9999;
-    background: url("./images/icon-menu.svg");
-    background-repeat: no-repeat;
-  }
 `;
 
 export default Nav;
