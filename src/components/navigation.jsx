@@ -6,22 +6,23 @@ import ToggleButton from "./ToogleButton";
 import Backdrop from "./Modal/Backdrop";
 function Nav({ number, reset }) {
   const [toggleDialogue, settoggleDialogue] = useState(false); // This toggles the cartbox
-  const [showNav, setShowNav] = useState(false); // This controls the open and close of the nav
+  const [showNav, setshowNav] = useState(false); // This controls the open and close of the nav for small screen size only
+  // Styled Nav
+
   return (
     <Header>
       <div className="pages-link">
-        <ToggleButton setNav={() => setShowNav(true)} />
+        <ToggleButton setNav={() => setshowNav(true)} />
         <a href="/">
           <img src="./images/logo.svg" alt="logo" />
         </a>
         {showNav && <Backdrop />}
         <PrimaryNavigation
-          style={showNav ? { display: "flex" } : { display: "none" }}
-          className="primary-nav"
+          className={showNav ? "primary-nav show" : "primary-nav"}
         >
           <svg
-            onClick={() => setShowNav(false)}
-            className="close-nav"
+            onClick={() => setshowNav(false)}
+            className="close-btn"
             width="14"
             height="15"
             xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +93,7 @@ const Header = styled.header`
     }
   }
 `;
+
 const PrimaryNavigation = styled.nav`
   display: flex;
   margin-left: 4rem;
@@ -106,14 +108,14 @@ const PrimaryNavigation = styled.nav`
       color: var(--Veryblue);
     }
   }
-  .close-nav {
+  .close-btn {
     display: none;
   }
   @media (max-width: 900px) {
+    display: none;
     position: fixed;
     left: 0;
     top: 0;
-    display: none;
     z-index: 100;
     inset: 0 30% 0 -65px;
     padding: 6rem 40px;
@@ -123,7 +125,7 @@ const PrimaryNavigation = styled.nav`
       padding: 0;
       font-weight: 700;
     }
-    .close-nav {
+    .close-btn {
       display: block;
       position: absolute;
       top: 30px;

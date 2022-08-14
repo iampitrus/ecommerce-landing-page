@@ -11,7 +11,10 @@ function ProductView({ showArrows, setShowModal, children }) {
       <div
         className="main-img"
         style={{ position: "relative" }}
-        onClick={() => setShowModal(true)}
+        onClick={(e) => {
+          window.innerWidth > 900 && setShowModal(true);
+          e.stopPropagation();
+        }}
       >
         {children}
         {showArrows && (
