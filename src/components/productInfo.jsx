@@ -8,14 +8,7 @@ function ProductView({ showArrows, setShowModal, children }) {
   return (
     <Container>
       {/* Big image */}
-      <div
-        className="main-img"
-        style={{ position: "relative" }}
-        onClick={(e) => {
-          window.innerWidth > 900 && setShowModal(true);
-          e.stopPropagation();
-        }}
-      >
+      <div className="main-img" style={{ position: "relative" }}>
         {children}
         {showArrows && (
           <div
@@ -38,7 +31,14 @@ function ProductView({ showArrows, setShowModal, children }) {
           </div>
         )}
         {/* This is the dynamic main image */}
-        <img src={products[active].mainUrl} alt="" />
+        <img
+          onClick={(e) => {
+            e.stopPropagation();
+            window.innerWidth > 900 && setShowModal(true);
+          }}
+          src={products[active].mainUrl}
+          alt=""
+        />
         {showArrows && (
           <div
             className="next"
@@ -162,6 +162,7 @@ const Container = styled.div`
     justify-content: space-between;
     margin: 1rem auto;
     .active-img {
+      position: relative;
       border: 2px solid var(--Orange);
     }
   }
@@ -179,7 +180,6 @@ const Container = styled.div`
       display: none;
     }
     .main-img img {
-      /* aspect-ratio: 2/1; */
       border-radius: 0;
       left: 50%;
       margin-left: -50vw;
@@ -234,15 +234,21 @@ const InfoContainer = styled.div`
     }
     .add-cart {
       position: relative;
-      padding: 15px 5rem;
+      padding-block: 15px;
       background-color: var(--Orange);
       color: #fff;
       border: none;
       border-radius: 10px;
       display: flex;
+      width: 15rem;
+      justify-content: center;
       align-items: center;
       svg {
         margin-right: 1rem;
+      }
+      @media (max-width: 600px) {
+        /* display: block; */
+        width: 100%;
       }
       &:hover::before {
         content: "";

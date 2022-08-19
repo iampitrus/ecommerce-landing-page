@@ -11,6 +11,7 @@ function Nav({ number, reset }) {
 
   return (
     <Header>
+      {/* Navigation */}
       <div className="pages-link">
         <ToggleButton setNav={() => setshowNav(true)} />
         <a href="/">
@@ -41,6 +42,7 @@ function Nav({ number, reset }) {
         </PrimaryNavigation>
       </div>
       <div className="user-link">
+        {/* Cart */}
         <div style={{ position: "relative" }}>
           <img
             onClick={() => settoggleDialogue(!toggleDialogue)}
@@ -49,13 +51,13 @@ function Nav({ number, reset }) {
             alt="shop"
           />
           {number > 0 && <NotifyBtn>{number}</NotifyBtn>}
+          {toggleDialogue && (
+            <Checkout>
+              <CartDialogue reset={reset} price={125.0} number={number} />
+            </Checkout>
+          )}
         </div>
         <img className="avatar" src="./images/image-avatar.png" alt="avatar" />
-        {toggleDialogue && (
-          <Checkout>
-            <CartDialogue reset={reset} price={125.0} number={number} />
-          </Checkout>
-        )}
       </div>
     </Header>
   );
@@ -148,8 +150,12 @@ const NotifyBtn = styled.button`
 
 const Checkout = styled.div`
   position: absolute;
-  top: 6rem;
-  right: 6rem;
+  top: 3rem;
+  z-index: 1999;
+  left: -190px;
+  @media (max-width: 900px) {
+    left: -250px;
+  }
 `;
 
 export default Nav;

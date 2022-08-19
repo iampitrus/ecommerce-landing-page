@@ -63,6 +63,9 @@ const ProductNumber = styled.div`
   .count {
     cursor: text;
   }
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export default ButtonGroup;

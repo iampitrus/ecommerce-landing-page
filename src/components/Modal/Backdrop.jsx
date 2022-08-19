@@ -4,9 +4,11 @@ const Backdrop = ({ setModal, showProductModal }) => {
   return (
     <Drop>
       {showProductModal && (
-        <ProductView showArrows={true}>
+        <ProductView setShowModal={setModal} showArrows={true}>
           <svg
-            onClick={() => setModal(false)}
+            onClick={() => {
+              setModal(false);
+            }}
             className="exit"
             width="14"
             height="15"

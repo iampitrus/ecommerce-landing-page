@@ -12,17 +12,17 @@ function App() {
   // This controls the click on the main image
   const [viewProduct, setViewProduct] = useState(false);
   return (
-    // How to increase the size of the viewed image with it not affecting that of the initial one on the screen before and add the functionality to the carousel buttons navigation
     <BrowserRouter>
       <Nav number={added} reset={setAdded} />
-      {viewProduct && (
-        <Backdrop showProductModal={viewProduct} setModal={setViewProduct} />
-      )}
+      {/* Trigger backdrop when product is clicked */}
       <ProductInfo
         handleChange={setAdded}
         showModal={viewProduct}
         setShowModal={setViewProduct}
       />
+      {viewProduct && (
+        <Backdrop showProductModal={viewProduct} setModal={setViewProduct} />
+      )}
       <Footer />
     </BrowserRouter>
   );
