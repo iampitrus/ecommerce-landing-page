@@ -46,7 +46,13 @@ Users should be able to:
 ### What I learned
 
 One of the few React projects i just decide to use no external library, even for Navbar😒. I only made use one external library, which is the styled-components used to apply styles directly to components.
-I learnt how to manage complex states and create better responsive designs using modern css with the likes of "clamp".
+I learnt how to manage complex states (which i used to create a dynamic image) and create better responsive designs using modern css with the likes of "clamp()".
+
+```css
+  .responsive{
+    clamp(40px, 30vw, 100px)
+  }
+```
 
 ## Author
 
