@@ -17,7 +17,7 @@ function Nav({ number, reset }) {
         <a href="/">
           <img src="./images/logo.svg" alt="logo" />
         </a>
-        {showNav && <Backdrop />}
+        {showNav && <Backdrop hideNav={setshowNav} />}
         <PrimaryNavigation
           className={showNav ? "primary-nav show" : "primary-nav"}
         >

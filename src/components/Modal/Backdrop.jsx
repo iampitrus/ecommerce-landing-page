@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { ProductView } from "../productInfo";
-const Backdrop = ({ setModal, showProductModal }) => {
+const Backdrop = ({ setModal, showProductModal, hideNav }) => {
   return (
-    <Drop>
+    <Drop onClick={() => hideNav(false)}>
       {showProductModal && (
         <ProductView setShowModal={setModal} showArrows={true}>
           <svg
