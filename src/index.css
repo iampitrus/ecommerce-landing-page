@@ -49,6 +49,6 @@ svg {
 }
 @media (max-width: 900px) {
   body {
-    margin-inline: 0.8rem;
+    margin-inline: 1rem;
   }
 }
