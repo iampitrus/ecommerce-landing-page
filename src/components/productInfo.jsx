@@ -63,14 +63,18 @@ function ProductView({ showArrows, setShowModal, children }) {
       {/* The thumbnails (Small images) */}
       <div className="thumbnails">
         {products.map((thumbs) => (
-          <img
-            onClick={() => setActive(thumbs.id)}
-            // Apply styles to the clicked thumbnail-img
-            className={active === thumbs.id ? "active-img" : "inactive"}
+          <div
             key={thumbs.id}
-            src={thumbs.thumbUrl}
-            alt="sneakers"
-          />
+            className={active === thumbs.id ? "active-img" : "inactive"}
+            style={{ position: "relative" }}
+            onClick={() => setActive(thumbs.id)}
+          >
+            <img
+              // Apply styles to the clicked thumbnail-img
+              src={thumbs.thumbUrl}
+              alt="sneakers"
+            />
+          </div>
         ))}
       </div>
     </Container>
@@ -175,14 +179,38 @@ const Container = styled.div`
     .active-img {
       position: relative;
       border: 2px solid var(--Orange);
+      &::before {
+        content: "";
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        border-radius: 10px;
+        background-color: var(--PaleOrange);
+      }
     }
-  }
-  .thumbnails img {
-    position: relative;
-    width: 75px;
-    border-radius: 10px;
-    &:hover {
-      border: 2px solid var(--Orange);
+    & img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    & > div {
+      width: 75px;
+      border-radius: 10px;
+    }
+    & > div:hover::before {
+      content: "";
+      opacity: 0.8;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      border-radius: 10px;
+      background-color: var(--PaleOrange);
     }
   }
   @media (max-width: 900px) {
