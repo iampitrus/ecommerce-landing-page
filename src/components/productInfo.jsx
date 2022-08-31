@@ -63,25 +63,33 @@ function ProductView({ showArrows, setShowModal, children }) {
       {/* The thumbnails (Small images) */}
       <div className="thumbnails">
         {products.map((thumbs) => (
-          <img
-            onClick={() => setActive(thumbs.id)}
-            // Apply styles to the clicked thumbnail-img
-            className={active === thumbs.id ? "active-img" : "inactive"}
+          <div
             key={thumbs.id}
-            src={thumbs.thumbUrl}
-            alt="sneakers"
-          />
+            className={active === thumbs.id ? "active-img" : "inactive"}
+            style={{ position: "relative" }}
+            onClick={() => setActive(thumbs.id)}
+          >
+            <img
+              // Apply styles to the clicked thumbnail-img
+              src={thumbs.thumbUrl}
+              alt="sneakers"
+            />
+          </div>
         ))}
       </div>
     </Container>
   );
 }
 
-function ProductInfo({ handleChange, showModal, setShowModal }) {
+function ProductInfo({ handleChange, showModal, setShowModal, showArrows }) {
   const [count, setCount] = useState(0);
   return (
     <InfoContainer>
-      <ProductView showModal={showModal} setShowModal={setShowModal} />
+      <ProductView
+        showModal={showModal}
+        setShowModal={setShowModal}
+        showArrows={showArrows}
+      />
       <div className="details">
         <h3 className="heading"> Sneaker Company</h3>
         <h1>
@@ -92,9 +100,13 @@ function ProductInfo({ handleChange, showModal, setShowModal }) {
           companion. Featuring a durable rubber outer sole, they’ll withstand
           everything the weather can offer.
         </p>
-        <h2 className="current-price">$125.00</h2>
-        <h3 className="discount">50%</h3>
-        <h3 className="old-price">$250.00</h3>
+        <div className="price">
+          <div>
+            <h2 className="current-price">$125.00</h2>
+            <h3 className="discount">50%</h3>
+          </div>
+          <h3 className="old-price">$250.00</h3>
+        </div>
         <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
           <ButtonGroup handleChange={setCount} count={count} />
           <button onClick={() => handleChange(count)} className="add-cart">
@@ -135,8 +147,10 @@ const Container = styled.div`
     border-radius: 100%;
     top: 40%;
     left: -22px;
+    z-index: 2;
     @media (max-width: 900px) {
-      left: 30px;
+      left: 1%;
+      scale: 0.8;
     }
   }
   .next {
@@ -151,7 +165,8 @@ const Container = styled.div`
     top: 40%;
     right: -22px;
     @media (max-width: 900px) {
-      right: 30px;
+      right: 1%;
+      scale: 0.8;
     }
   }
 
@@ -164,14 +179,38 @@ const Container = styled.div`
     .active-img {
       position: relative;
       border: 2px solid var(--Orange);
+      &::before {
+        content: "";
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        border-radius: 10px;
+        background-color: var(--PaleOrange);
+      }
     }
-  }
-  .thumbnails img {
-    position: relative;
-    width: 75px;
-    border-radius: 10px;
-    &:hover {
-      border: 2px solid var(--Orange);
+    & img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    & > div {
+      width: 75px;
+      border-radius: 10px;
+    }
+    & > div:hover::before {
+      content: "";
+      opacity: 0.8;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      border-radius: 10px;
+      background-color: var(--PaleOrange);
     }
   }
   @media (max-width: 900px) {
@@ -184,6 +223,7 @@ const Container = styled.div`
       left: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
+      margin-bottom: 1rem;
       right: 50%;
       width: 100vw;
       position: relative;
@@ -214,6 +254,12 @@ const InfoContainer = styled.div`
       color: var(--Darkgrayishblue);
       margin-block: 1.6rem;
       line-height: 1.5;
+    }
+    .price {
+      @media (max-width: 900px) {
+        display: flex;
+        justify-content: space-between;
+      }
     }
     h2.current-price {
       display: inline-block;
@@ -247,7 +293,6 @@ const InfoContainer = styled.div`
         margin-right: 1rem;
       }
       @media (max-width: 600px) {
-        /* display: block; */
         width: 100%;
       }
       &:hover::before {
