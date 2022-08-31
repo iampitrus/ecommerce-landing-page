@@ -15,9 +15,13 @@ Users should be able to:
 - Add items to the cart
 - View the cart and remove items from it
 
-### Screenshot
+### Preview
 
-![Screenshot](https://user-images.githubusercontent.com/66377818/185800847-fa56edba-f577-45d8-9fa2-ad295a90e59e.png)
+[Live Link](https://ecommerce-landing-page2.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/16eeaa24-0e23-457b-aa78-4012fd5ee4f3/deploy-status)](https://app.netlify.com/sites/ecommerce-landing-page2/deploys?branch=main)
+
+![Screenshot](https://user-images.githubusercontent.com/66377818/187595010-d92f0893-84e3-4fd1-9e23-a47934a83293.png)
+
 
 ## My process
 
@@ -32,7 +36,7 @@ Users should be able to:
 
 ### What I learned
 
-One of the few React projects i just decide to use no external library, even for Navbar😒. I only made use one external library, which is the styled-components used to apply styles directly to components.
+One of the few React projects i just decide to use no external library, except the styled-components used to apply styles directly to components.
 I learnt how to manage complex states (which i used to create a dynamic image) and create better responsive designs using modern css with the likes of "clamp()".
 
 ```css
