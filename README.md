@@ -2,18 +2,6 @@
 
 This is a solution to the [E-commerce product page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/ecommerce-product-page-UPsZ9MJp6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Table of contents
-
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -30,7 +18,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Screenshot](https://user-images.githubusercontent.com/66377818/185800847-fa56edba-f577-45d8-9fa2-ad295a90e59e.png)
 
 ## My process
 
@@ -56,8 +44,8 @@ I learnt how to manage complex states (which i used to create a dynamic image) a
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/peterintech)
+- Frontend Mentor - [@iampitrus](https://www.frontendmentor.io/profile/iampitrus)
+- Twitter - [@Peterintech](https://www.twitter.com/peterintech)
 
 ## Acknowledgments
 
